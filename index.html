@@ -14,10 +14,30 @@
       crossorigin="anonymous"
     ></script>
     <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"
     ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
+      integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="
+      crossorigin="anonymous"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/style.css" />
     <title>Find Emoji</title>
@@ -39,11 +59,12 @@
         <div class="emojis d-flex flex-wrap justify-content-center">
           <div
             class="emoji"
+            :class="{'emoji-active heartBeat animated': activeEmoji === emoji}"
+            :id="'emoji-' + index"
             v-if="emojiResultsToShow.length > 0"
             v-for="(emoji,index) in emojiResultsToShow"
-            :title="emoji.name"
-            :content="'copied to clipboard'"
-            data-toggle="popover"
+            :data-clipboard-text="emoji.char"
+            @click="copyToClipboard(emoji, index)"
           >
             {{emoji.char}}
           </div>
@@ -56,6 +77,14 @@
         </div>
       </div>
     </div>
+
+    <a
+      class="github-fork-ribbon"
+      href="https://github.com/bibhuticoder/find-emoji"
+      data-ribbon="Fork me on GitHub"
+      title="Fork me on GitHub"
+      >Fork me on GitHub</a
+    >
 
     <script src="/script.js"></script>
   </body>

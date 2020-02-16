@@ -2,6 +2,7 @@ new Vue({
     el: '#app',
     data: {
         emojis: [],
+        activeEmoji: null,
         emojiResults: [],
         emojiResultsToShow: [],
         pageNo: 0,
@@ -20,7 +21,8 @@ new Vue({
         // ],
         // subgroups: [],
         // categories: [],
-        loading: false
+        loading: false,
+        clipboard: null
     },
 
     created() {
@@ -46,6 +48,7 @@ new Vue({
             }
         });
 
+        this.clipboard = new ClipboardJS('.emoji');
     },
 
     methods: {
@@ -77,6 +80,7 @@ new Vue({
                 }
             );
             this.pageNo = 1;
+            this.activeEmoji = null;
             this.emojiResultsToShow = this.emojiResults.slice(0, this.perPage);
         },
 
@@ -88,6 +92,14 @@ new Vue({
                 this.emojiResultsToShow = this.emojiResults.slice(0, lastIndex);
                 this.loading = false;
             }
+        },
+
+        copyToClipboard(emoji, index) {
+            this.activeEmoji = emoji;
+            $('#emoji-' + index).tooltip('show');
+            setTimeout(() => {
+                $('#emoji-' + index).tooltip('hide');
+            }, 500);
         }
     }
 })
