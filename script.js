@@ -54,7 +54,7 @@ new Vue({
     methods: {
         fetchEmojis() {
             this.loading = true;
-            fetch('/emoji-data.json')
+            fetch('./emoji-data.json')
                 .then(
                     (response) => {
                         response.json().then((data) => {
