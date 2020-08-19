@@ -8,19 +8,6 @@ new Vue({
         pageNo: 0,
         perPage: 100,
         searchKeyword: '',
-        // groups: [
-        //     "Smileys & Emotion",
-        //     "People & Body",
-        //     "Animals & Nature",
-        //     "Food & Drink",
-        //     "Travel & Places",
-        //     "Activities",
-        //     "Objects",
-        //     "Symbols",
-        //     "Flags"
-        // ],
-        // subgroups: [],
-        // categories: [],
         loading: false,
         clipboard: null
     },
@@ -76,7 +63,7 @@ new Vue({
                 this.emojiResults = this.emojis;
             else this.emojiResults = this.emojis.filter(
                 emoji => {
-                    return emoji.name.search(new RegExp(this.searchKeyword, "i")) >= 0
+                    return emoji.name.search(new RegExp(this.searchKeyword, "i")) >= 0 || emoji.category.search(new RegExp(this.searchKeyword, "i")) >= 0 || emoji.group.search(new RegExp(this.searchKeyword, "i")) >= 0 || emoji.subgroup.search(new RegExp(this.searchKeyword, "i")) >= 0
                 }
             );
             this.pageNo = 1;
